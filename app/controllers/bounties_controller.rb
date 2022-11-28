@@ -10,8 +10,9 @@ class BountiesController < ApplicationController
 
   def create
     @bounty = Bounty.new(bounties_params)
+    @bounty.user = current_user
     if @bounty.save
-      redirect_to bounties(@bounty)
+      redirect_to bounties_path
     else
       render "new", status: :unprocessable_entity
     end
